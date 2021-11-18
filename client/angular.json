@@ -12,8 +12,8 @@
           "flat": true,
           "inlineStyle": true,
           "inlineTemplate": true,
-          "skipTests": false
-          
+          "skipTests": true
+
         },
         "@schematics/angular:application": {
           "strict": true
@@ -37,9 +37,12 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/tuicss.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/tuicss.js"
+            ]
           },
           "configurations": {
             "production": {
