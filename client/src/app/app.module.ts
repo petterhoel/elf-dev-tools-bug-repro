@@ -7,13 +7,15 @@ import { AboutComponent } from './about.component';
 import { EditComponent } from './edit.component';
 import { ElfListComponent } from './elf-list.component';
 import {CommonModule} from "@angular/common";
+import { AlfComponent } from './alf.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutComponent,
     EditComponent,
-    ElfListComponent
+    ElfListComponent,
+    AlfComponent
   ],
   imports: [
     BrowserModule,
