@@ -8,6 +8,12 @@
     "watch": "ng build --watch --configuration development"
   },
   "private": true,
+  "elf": {
+    "cli": {
+      "repoTemplate": "class",
+      "plugins": ["@ngneat/elf-cli-ng"]
+    }
+  },
   "dependencies": {
     "@angular/animations": "~13.0.0",
     "@angular/common": "~13.0.0",
@@ -31,6 +37,8 @@
     "@angular/cli": "~13.1.0-next.2",
     "@angular/compiler-cli": "~13.0.0",
     "@angular/language-service": "~13.0.2",
+    "@ngneat/elf-cli-ng": "^1.0.0-beta.1",
+    "@ngneat/elf-cli": "1.0.0-beta.12",
     "@types/node": "^12.11.1",
     "tuicss": "^2.1.1"
   }
