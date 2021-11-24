@@ -27,7 +27,9 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
             <ul>
               <li><a routerLink="/about"><span class="red-168-text">A</span>bout</a></li>
               <li><a routerLink="/edit"><span class="red-168-text">E</span>dit</a></li>
-            </ul>
+              <li><a href="https://ngneat.github.io/elf/docs/store" target="_blank" ><span class="red-168-text">E</span>lf docs</a>
+
+              </li>            </ul>
           </div>
         </li>
       </ul>

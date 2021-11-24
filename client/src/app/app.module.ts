@@ -8,6 +8,7 @@ import { EditComponent } from './edit.component';
 import { ElfListComponent } from './elf-list.component';
 import {CommonModule} from "@angular/common";
 import { AlfComponent } from './alf.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AlfComponent } from './alf.component';
   imports: [
     BrowserModule,
     CommonModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],

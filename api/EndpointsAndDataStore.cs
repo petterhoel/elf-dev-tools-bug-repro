@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Cors;
 namespace api;
 
+[EnableCors] 
 [ApiController]
 [Route("elf")]
 public class ElfEndpoint : ControllerBase
