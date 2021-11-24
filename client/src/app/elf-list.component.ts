@@ -11,7 +11,7 @@ import {Elf} from "./elf-state/elf";
       <div class="tui-panel-content white-168">
         Oh no - no elves
       </div>
-      <button (click)="respawnClicked.emit()" class="tui-button orange-168">Respawn</button>
+      <button (click)="respawnClicked.emit()" class="tui-button orange-168">Respawn 🪄</button>
     </div>
     <table class="tui-table blue-168 hovered-cyan list" *ngIf="elves.length">
       <thead>
