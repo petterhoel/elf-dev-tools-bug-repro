@@ -26,10 +26,23 @@ public class ElfEndpoint : ControllerBase
         return ElfStore.Save(elf);
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id}", Name = "DeleteElf")]
     public Elf Delete(Guid id) 
     {
         return ElfStore.Delete(id);
+    }
+}
+
+[EnableCors] 
+[ApiController]
+[Route("elf-respawn")]
+public class ElfRespawnEndpoint : ControllerBase
+{
+
+    [HttpPost(Name = "RespawnElves")]
+    public IEnumerable<Elf> Post()
+    {
+        return ElfStore.ReSpawn();
     }
 }
 
@@ -53,20 +66,30 @@ public class ElfAttributeEndpoint : ControllerBase
 
 public static class ElfStore
 {
+    private static Elf[] OriginalElves {get; } = new Elf[]
+    {
+            new Elf(Guid.NewGuid(), "Link", true, new string []{"mystical", "legendary"}),
+            new Elf(Guid.NewGuid(), "Legolas", true, new string []{"fierce", "popular"}),
+            new Elf(Guid.NewGuid(), "Buddy", false, new string []{}),
+    };
     private static List<Elf> Elves { get; set; }
 
     static ElfStore()
     {
-        Elves = new List<Elf> 
-        {
-             new Elf(Guid.NewGuid(), "Link", true, new string []{"mystical", "legendary"}),
-             new Elf(Guid.NewGuid(), "Legolas", true, new string []{"fierce", "popular"}),
-             new Elf(Guid.NewGuid(), "Buddy", false, new string []{}),
-        };
+       Spawn();
     }
+
+    private static void Spawn()
+    {
+        Elves = OriginalElves.ToList();
+    }
+    public static List<Elf> ReSpawn() {
+        Spawn();
+        return AllElves;
+    }
+
     public static List<Elf> AllElves => Elves;
     public static Elf GetById(Guid id) => Elves.Single(elf => elf.Id == id);
-
     public static Elf Delete(Guid id) 
     {
         var elf = GetById(id);

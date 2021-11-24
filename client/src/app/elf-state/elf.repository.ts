@@ -1,25 +1,21 @@
-import { Store, createState } from '@ngneat/elf';
+import {createState, Store} from '@ngneat/elf';
 import {
-  withEntities,
-  selectAll,
-  setEntities,
   addEntities,
-  updateEntities,
   deleteEntities,
-  withUIEntities,
-  withActiveId, setActiveId, selectActiveEntity
+  selectActiveEntity,
+  selectAll,
+  setActiveId,
+  setEntities,
+  updateEntities,
+  withActiveId,
+  withEntities
 } from '@ngneat/elf-entities';
-import { withRequestsStatus } from '@ngneat/elf-requests';
-import { Injectable } from '@angular/core';
-import {Elf, ElfBase} from "./elf";
-import {HttpClient} from "@angular/common/http";
-import {tap} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Elf} from "./elf";
 
 export interface ElfUI {
   id: string;
 }
-
-
 
 const { state, config } = createState(withEntities<Elf>(), withActiveId());
 const store = new Store({ name: 'elf', state, config });
@@ -51,31 +47,3 @@ export class ElfRepository {
 }
 
 
-@Injectable({ providedIn: 'root' })
-export class ElfApi
-{
-  url = 'https://localhost:7114/elf'
-  constructor(private http: HttpClient, private repo: ElfRepository) {}
-
-  getElves(): void {
-    this.http
-      .get<Elf[]>(this.url)
-      .pipe(
-        tap(this.repo.setElf)
-      )
-      .subscribe();
-  }
-
-  lagre(elf: ElfBase): void {
-    this.http
-      .post<Elf>(this.url, elf)
-      .pipe(
-        tap(elfFromApi => this.repo.updateElf(elfFromApi.id, elfFromApi))
-      )
-      .subscribe()
-  }
-
-  settAktiv(id: Elf['id']): void {
-    this.repo.setActive(id);
-  }
-}
