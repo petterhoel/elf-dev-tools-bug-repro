@@ -12,7 +12,7 @@ import {Elf} from "./elf-state/elf";
         Oh no - no elves
       </div>
     </div>
-    <table class="tui-table" *ngIf="elves.length">
+    <table class="tui-table blue-168 hovered-cyan" *ngIf="elves.length">
       <thead>
       <tr>
         <th>Name</th>
@@ -22,7 +22,7 @@ import {Elf} from "./elf-state/elf";
       </thead>
       <tbody>
       <tr *ngFor="let elf of elves">
-        <td>{{elf.name}}</td> <td>{{elf.canFight}}</td> <td><button>edit</button></td>
+        <td>{{elf.name}}</td> <td>{{elf.canFight}}</td> <td><button (click)="elfSelected.emit(elf.id)">edit</button></td>
       </tr>
       </tbody>
     </table>
@@ -34,5 +34,5 @@ import {Elf} from "./elf-state/elf";
 })
 export class ElfListComponent {
   @Input() elves: Elf[] = [];
-  @Output() elfSelected = new EventEmitter<string>();
+  @Output() elfSelected = new EventEmitter<Elf['id']>();
 }
