@@ -11,7 +11,7 @@ import {
 } from '@ngneat/elf-entities';
 import { withRequestsStatus } from '@ngneat/elf-requests';
 import { Injectable } from '@angular/core';
-import {Elf} from "./elf";
+import {Elf, ElfBase} from "./elf";
 import {HttpClient} from "@angular/common/http";
 import {tap} from "rxjs";
 
@@ -64,6 +64,15 @@ export class ElfApi
         tap(this.repo.setElf)
       )
       .subscribe();
+  }
+
+  lagre(elf: ElfBase): void {
+    this.http
+      .post<Elf>(this.url, elf)
+      .pipe(
+        tap(elfFromApi => this.repo.updateElf(elfFromApi.id, elfFromApi))
+      )
+      .subscribe()
   }
 
   settAktiv(id: Elf['id']): void {

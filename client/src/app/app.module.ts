@@ -10,6 +10,7 @@ import {CommonModule} from "@angular/common";
 import { AlfComponent } from './alf.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ElfFormComponent } from './elf-form.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ElfFormComponent } from './elf-form.component';
     BrowserModule,
     CommonModule,
     HttpClientModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

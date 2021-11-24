@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {ElfApi, ElfRepository} from "./elf-state/elf.repository";
-import {Elf} from "./elf-state/elf";
+import {Elf, ElfBase} from "./elf-state/elf";
 import {tap} from "rxjs";
 
 @Component({
   selector: 'app-edit',
   template: `
     <app-elf-list *ngIf="elves$ | async as elves" [elves]="elves" (elfSelected)="settAktiv($event)"></app-elf-list>
-    <app-elf-form *ngIf="selectedElf$ | async as elf" [elf]="elf"></app-elf-form>
+    <app-elf-form *ngIf="selectedElf$ | async as elf" [elf]="elf" (submitted)="lagre($event)"></app-elf-form>
   `,
   styles: [
   ],
@@ -23,7 +23,11 @@ export class EditComponent implements OnInit{
     this.api.getElves();
   }
 
+  lagre(elf: ElfBase): void {
+    this.api.lagre(elf);
+  }
+
   settAktiv(id: Elf['id']): void {
-    this.repo.setActive(id);
+    this.api.settAktiv(id);
   }
 }

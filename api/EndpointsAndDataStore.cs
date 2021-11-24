@@ -25,6 +25,12 @@ public class ElfEndpoint : ControllerBase
     {
         return ElfStore.Save(elf);
     }
+
+    [HttpDelete("{id}")]
+    public Elf Delete(Guid id) 
+    {
+        return ElfStore.Delete(id);
+    }
 }
 
 [ApiController]
@@ -60,6 +66,17 @@ public static class ElfStore
     }
     public static List<Elf> AllElves => Elves;
     public static Elf GetById(Guid id) => Elves.Single(elf => elf.Id == id);
+
+    public static Elf Delete(Guid id) 
+    {
+        var elf = GetById(id);
+        if (elf is null)
+        {
+            return null;
+        }
+        Elves.Remove(elf);
+        return elf;
+    }
     public static Elf Save(ElfSaveRequest toSave) 
     {
         try 
@@ -70,7 +87,7 @@ public static class ElfStore
             }
             var elf = GetById(toSave.Id);
             var index = Elves.IndexOf(elf);
-            Elves[index] = elf;
+            Elves[index] = elf with { Name = toSave.Name, CanFight = toSave.CanFight };
         }
 
         catch (InvalidOperationException)
