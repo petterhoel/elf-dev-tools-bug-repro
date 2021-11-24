@@ -25,6 +25,6 @@ npm i
 
 ## Kjør frontend
 ```
-cd frontend
+cd client
 npm start
 ```
