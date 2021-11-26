@@ -1,29 +1,29 @@
 # ELF POC
 
-_!!!dette er en WIP!!!_
+Small in memory .Net 6 web api and Angular 13 app with Elf
 
-Bittelite in memory web api og en webapp som bruker elf for state management
+You will ned [.Net 6 sdk](https://dotnet.microsoft.com/download) installed and npm/yarn
 
-## Mappestruktur
+## Folders
 ```
 <repo>
   |-api/
   |-client/
 ```
 
-## Kjør apiet (.Net 6)
+## Run webapi (.Net 6)
 ```
 cd api
 dotnet watch
 ```
 
-## Installer npm pakker
+## Install npm deps
 ```
 cd client
 npm i
 ```
 
-## Kjør frontend
+## Run front end app
 ```
 cd client
 npm start
