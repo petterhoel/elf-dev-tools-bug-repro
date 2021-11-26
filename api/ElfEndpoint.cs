@@ -9,26 +9,30 @@ public class ElfEndpoint : ControllerBase
 {
 
     [HttpGet(Name = "GetElf")]
-    public IEnumerable<Elf> Get()
+    public async Task<IEnumerable<Elf>> GetAsync()
     {
+        await DummyDelayer.RandomWaitAsync();
         return ElfStore.AllElves;
     }
 
     [HttpGet("{id}", Name = "GetElfById")]
-    public Elf GetById(Guid id)
+    public async Task<Elf> GetByIdAsync(Guid id)
     {
+        await DummyDelayer.RandomWaitAsync();
         return ElfStore.GetById(id);
     }
 
     [HttpPost(Name = "SaveElf")]
-    public Elf Post([FromBody] ElfSaveRequest elf)
+    public async Task<Elf> PostAsync([FromBody] ElfSaveRequest elf)
     {
+        await DummyDelayer.RandomWaitAsync();
         return ElfStore.Save(elf);
     }
 
     [HttpDelete("{id}", Name = "DeleteElf")]
-    public Elf Delete(Guid id) 
+    public async Task<Elf> DeleteAsync(Guid id) 
     {
+        await DummyDelayer.RandomWaitAsync();
         return ElfStore.Delete(id);
     }
 }

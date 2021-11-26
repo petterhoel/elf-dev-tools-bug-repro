@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {ElfRepository} from "./elf-state/elf.repository";
 import {Elf, ElfBase} from "./elf-state/elf";
-import {tap} from "rxjs";
 import {ElfApi} from "./elf-state/elf-api.service";
 
 @Component({
@@ -20,7 +19,7 @@ import {ElfApi} from "./elf-state/elf-api.service";
 })
 export class EditComponent implements OnInit{
   elves$ = this.repo.elf$;
-  selectedElf$ = this.repo.selectedElf$.pipe(tap(console.log));
+  selectedElf$ = this.repo.selectedElf$;
   constructor(
     private repo: ElfRepository,
     private api: ElfApi) {}

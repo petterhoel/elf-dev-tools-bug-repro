@@ -9,14 +9,16 @@ public class ElfAttributeEndpoint : ControllerBase
 {
 
     [HttpGet(Name = "GetElfAttributes")]
-    public string[] Get()
+    public async Task<string[]> GetAsync()
     {
+        await DummyDelayer.RandomWaitAsync();
         return new string[] {"magical", "fierce", "mystical", "ill tempered", "well mannered", "legendary"};
     }
 
     [HttpPost(Name = "SaveElfAttribute")]
-    public ElfAttributeSaveRequest Post([FromBody] ElfAttributeSaveRequest elfAttributes)
+    public async Task <ElfAttributeSaveRequest> PostAsync([FromBody] ElfAttributeSaveRequest elfAttributes)
     {
+        await DummyDelayer.RandomWaitAsync();
         return ElfStore.SaveAttributes(elfAttributes);
     }
 }

@@ -9,8 +9,9 @@ public class ElfRespawnEndpoint : ControllerBase
 {
 
     [HttpPost(Name = "RespawnElves")]
-    public IEnumerable<Elf> Post()
+    public async Task<IEnumerable<Elf>> PostAsync()
     {
+        await DummyDelayer.RandomWaitAsync();
         return ElfStore.ReSpawn();
     }
 }

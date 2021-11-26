@@ -45,5 +45,3 @@ export class ElfRepository {
     store.update(deleteEntities(id));
   }
 }
-
-
