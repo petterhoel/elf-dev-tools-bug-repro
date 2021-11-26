@@ -11,6 +11,10 @@ import { AlfComponent } from './alf.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ElfFormComponent } from './elf-form.component';
 import {FormsModule} from "@angular/forms";
+import {environment} from "../environments/environment";
+import {devTools} from "@ngneat/elf-devtools";
+
+!environment.production ? devTools() : null;
 
 @NgModule({
   declarations: [

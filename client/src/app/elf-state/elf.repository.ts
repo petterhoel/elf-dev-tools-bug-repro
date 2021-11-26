@@ -12,36 +12,48 @@ import {
 } from '@ngneat/elf-entities';
 import {Injectable} from '@angular/core';
 import {Elf} from "./elf";
+import {createRequestsStatusOperator, updateRequestStatus, withRequestsStatus} from "@ngneat/elf-requests";
 
 export interface ElfUI {
   id: string;
 }
 
-const { state, config } = createState(withEntities<Elf>(), withActiveId());
-const store = new Store({ name: 'elf', state, config });
+const { state, config } = createState(
+  withEntities<Elf>(),
+  withActiveId(),
+  withRequestsStatus<`elf` | `elf-${string}`>());
+
+const name = 'elf';
+const store = new Store({ name, state, config });
+const trackTodosRequestsStatus = createRequestsStatusOperator(store);
 
 @Injectable({ providedIn: 'root' })
 export class ElfRepository {
-  elf$ = store.pipe(selectAll());
-  selectedElf$ = store.pipe(selectActiveEntity())
+  public elf$ = store.pipe(selectAll());
+  public selectedElf$ = store.pipe(selectActiveEntity())
 
-  setElf(elf: Elf[]) {
-    store.update(setEntities(elf));
+  public setElf(elf: Elf[]) {
+    store.update(
+      setEntities(elf),
+      updateRequestStatus(name, 'success')
+      );
   }
 
-  addElf(elf: Elf) {
+  public trackElfRequestsStatus = trackTodosRequestsStatus;
+
+  public addElf(elf: Elf) {
     store.update(addEntities(elf));
   }
 
-  setActive(id: Elf['id']): void {
+  public setActive(id: Elf['id']): void {
     store.update(setActiveId(id))
   }
 
-  updateElf(id: Elf['id'], elf: Partial<Elf>) {
+  public updateElf(id: Elf['id'], elf: Partial<Elf>) {
     store.update(updateEntities(id, elf));
   }
 
-  deleteElf(id: Elf['id']) {
+  public deleteElf(id: Elf['id']) {
     store.update(deleteEntities(id));
   }
 }

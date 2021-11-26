@@ -19,7 +19,8 @@ export class ElfApi {
         this.http
             .get<Elf[]>(`${this.url}elf`)
             .pipe(
-                tap(this.repo.setElf)
+                tap(this.repo.setElf),
+                this.repo.trackElfRequestsStatus('elf')
             )
             .subscribe();
     }
